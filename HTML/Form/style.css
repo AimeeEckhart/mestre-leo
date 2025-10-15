@@ -1,0 +1,27 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #F4F0EA;
+    color: #798252;
+    label:hover {
+        cursor: pointer;
+        color: #803232;
+    }
+}
+
+
+header {
+    padding: 2rem;
+    background-color:#715ac5;
+    color:azure;
+}
+
+input{
+    padding: 0.2rem;
+}
