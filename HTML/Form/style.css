@@ -1,3 +1,22 @@
+/* =========================
+   Tokens (CSS Custom Props)
+   ========================= */
+   :root {
+    --color-text: #798252;
+    --color-accent: #63783D;
+    --color-beige: 239, 231, 220; /* para usar com rgba() */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+}
+
+/* =========
+   Base/Reset
+   ========= */
 * {
     margin: 0;
     padding: 0;
@@ -5,51 +24,13 @@
 }
 
 body {
-    background-color: #F4F0EA;
-    color: #798252;
+    color: var(--color-text);
+    background: url('img/bg.jpg') center / cover no-repeat fixed;
 }
 
 header {
-    padding: 1rem;
-    
-    color: #63783D;
-}
-
-input {
-    padding: 0.2rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
-.split { 
-    display: flex; 
-    min-height: 100vh; 
-    align-items: stretch; 
-    justify-content: flex-start;
-}
-
-.split-left {
-    flex: 0 0 30%;              /* 30% fixos */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;              /* opcional */
-}
-
-.split-right {
-    flex: 0 0 60%;              /* 50% fixos */
-    display: flex;
-    flex-direction: column;
-    padding: 2rem;              /* opcional */
-}
-
-/* imagem responsiva */
-.split-left img {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
+    padding: var(--space-4);
+    color: var(--color-accent);
 }
 
 label:hover {
@@ -57,69 +38,99 @@ label:hover {
     color: #99CD85;
 }
 
-.form-grid { 
-    display: grid; 
-    grid-template-columns: repeat(12, 1fr); 
-    gap: 0 0.25rem;
+input {
+    padding: 0.2rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid #ccc;
 }
 
+/* ======
+   Layout
+   ====== */
+.split {
+    display: flex;
+    min-height: 100vh;
+    align-items: stretch;
+    justify-content: center;
+}
 
-.field { grid-column: span 6; }
-.field.full { grid-column: span 12; }
-.field label { display: block; margin-bottom: 0.25rem; }
-.field input, .field select, .field textarea { width: 100%; }
+.split-right {
+    width: 100%;
+    max-width: 720px;
+    margin: 3rem auto;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    background: url('img/bg.jpg') center / cover no-repeat;
+    position: relative;
+    isolation: isolate;
+}
 
-.options { display: flex; gap: 1rem; flex-wrap: wrap; }
+.split-right::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(244, 240, 234, 0.6);
+    z-index: -1;
+}
 
-@media (max-width: 700px) {
-    .field, .field.full { grid-column: span 12; } }
+/* ==========
+   Componentes
+   ========== */
 
+/* Título */
+.split-right header h1 {
+    background: #516638;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2) var(--space-3);
+    color:#ccc;
+}
 
-/* inputs (e selects) maiores */
+/* Grid do formulário */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3) var(--space-3);
+    align-items: start;
+}
+
+.field { grid-column: span 1; min-width: 0; }
+.field.full { grid-column: 1 / -1; }
+
+.field label {
+    display: block;
+    margin-bottom: var(--space-1);
+}
+
+/* Controles */
 .field input,
 .field select {
-    width: 70%;           /* mais largos */
-    padding: 0.5rem 0.7rem; /* mais altos via padding */
-    box-sizing: border-box;
-    border-radius: 4px;   /* bordas arredondadas */
-    border: 1px solid #ccc; /* borda cinza */
-}
-
-/* Textarea menor */
-.field textarea {
-    width: 60%;
+    width: 100%;
     padding: 0.5rem 0.7rem;
     box-sizing: border-box;
-    border-radius: 4px;   /* bordas arredondadas */
-    border: 1px solid #ccc; /* borda cinza */
+    border-radius: var(--radius-sm);
+    border: 1px solid #ccc;
 }
 
-/* Em telas pequenas, volte a 100% para melhor usabilidade */
-@media (max-width: 700px) {
-    .field input,
-    .field select,
-    .field textarea {
-        width: 100%;
-    }
-}
-   
-/* campos da coluna da esquerda: encosta à direita */
-.form-grid > .field:nth-child(odd) input,
-.form-grid > .field:nth-child(odd) select,
-.form-grid > .field:nth-child(odd) textarea {
-    width: 92%;
-    margin-left: auto;
+.field textarea {
+    width: 100%;
+    padding: 0.5rem 0.7rem;
+    box-sizing: border-box;
+    border-radius: var(--radius-sm);
+    border: 1px solid #ccc;
 }
 
-/* campos da coluna da direita: encosta à esquerda */
-.form-grid > .field:nth-child(even) input,
-.form-grid > .field:nth-child(even) select,
-.form-grid > .field:nth-child(even) textarea {
-    width: 92%;
-    margin-right: auto;
+/* Opções (radios/checkboxes) */
+.options {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
 }
 
-/* Força o "Enviar Formulário" a ~3 cm de largura e alinha à direita */
+/* Submit */
 .form-grid .field.full input[type="submit"] {
     width: 2cm !important;
     padding: 0.25rem;
@@ -128,92 +139,190 @@ label:hover {
     display: block;
     margin-left: auto;
     margin-right: 0 !important;
-    background-color: #63783D;  /* cor de fundo igual ao header */
-    color: azure;               /* texto branco */
-    border: none;               /* remove borda padrão */
-    border-radius: 4px;         /* cantos arredondados */
-    cursor: pointer;            /* cursor de mão */
+    background-color: var(--color-accent);
+    color: azure;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
 }
 
-
-/* Garante que o submit ignore as regras de coluna */
-.form-grid > .field:nth-child(odd) input[type="submit"],
-.form-grid > .field:nth-child(even) input[type="submit"] {
-    margin-left: auto !important;
-    margin-right: 0 !important;
+/* Cards/bege: campos principais */
+.split-right .field:has(#campo_nome),
+.split-right .field:has(#campo_email),
+.split-right .field:has(#campo_senha),
+.split-right .field:has(#campo_senha2),
+.split-right .field:has(#colors),
+.split-right .field:has(#opiniao) {
+    background: rgba(var(--color-beige), 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: var(--radius-lg);
+    padding: var(--space-3) var(--space-3);
 }
 
+/* Radios (fieldset) */
+.split-right fieldset.field.full {
+    background: rgba(var(--color-beige), 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: var(--radius-lg);
+    padding: 0.75rem 0.75rem 0.5rem;
+}
+.split-right fieldset.field.full > legend {
+    background: rgba(var(--color-beige), 0.8);
+    padding: 0.15rem 0.4rem;
+    border-radius: var(--radius-md);
+}
+.split-right fieldset.field.full:focus-within {
+    outline: 2px solid rgba(99, 120, 61, 0.25);
+    outline-offset: 2px;
+}
 
-.field.full legend {
-    font-size: 1.25rem;
-    font-weight: 600;
+/* Checkboxes (bloco) */
+.split-right .field.full.block-checkbox {
+    background: rgba(var(--color-beige), 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: var(--radius-lg);
+    padding: 0.75rem 0.75rem 0.5rem;
+}
+.split-right .field.full.block-checkbox > h2 {
+    background: rgba(var(--color-beige), 0.8);
+    padding: 0.15rem 0.4rem;
+    border-radius: var(--radius-md);
+    font-size: 1.05rem;
     margin-bottom: 0.5rem;
 }
-fieldset.field.full {
-    border: none;
-    padding: 0;
-    margin: 0;
-}
 
-.block-checkbox {
-    margin-top: 1rem; /* ajuste o valor conforme desejar */
-}
-
-/* adiciona espaço acima do select quando ele vem logo após um .field.full */
+/* Espaçamentos específicos */
+.block-checkbox { margin-top: 1rem; }
 .field.full + .field { margin-top: 2rem; }
+.field label[for="opiniao"] { margin-top: 2rem; }
 
-/* espaço acima do label da textarea */
-.field label[for="opiniao"] {
-    display: block;       /* garante que a margem funcione verticalmente */
-    margin-top: 2rem;  /* ajuste o valor conforme quiser */
-}
-
-
-
-/* botão "Clique aqui" - tamanho ~3 cm */
+/* Utilidades */
 button.btn-small {
     width: 3cm;
     padding: 0.25rem;
-    font-size: 0.875rem; 
+    font-size: 0.875rem;
     text-align: center;
 }
 
-/* Título do checkbox menor */
-.block-checkbox h2 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+/* ============
+   Media Queries
+   ============ */
+@media (max-width: 700px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .field, .field.full { grid-column: 1 / -1; }
+
+    .field input,
+    .field select,
+    .field textarea { width: 100%; }
 }
 
-/* Título do radio menor */
-fieldset legend {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
+/* Tipografia neutra */
+body {
+    font-family: "Segoe UI", Roboto, Inter, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5;
 }
 
-/* Espaço maior entre as linhas do formulário */
-.form-grid {
-    display: grid; 
-    grid-template-columns: repeat(12, 1fr); 
-    gap: 1rem 0.25rem;  /* aumentou de 0 0.25rem para 1rem 0.25rem */
+/* Card mais formal */
+.split-right {
+    background: rgba(255,255,255,0.88);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    border-radius: 8px;
 }
 
-/* Labels dos campos principais um pouco maiores e em negrito */
-label[for="campo_nome"],
-label[for="campo_email"],
-label[for="campo_senha"],
-label[for="campo_senha2"] {
-    font-size: 1.05rem;
+/* Título mais discreto */
+.split-right header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+/* Labels mais formais */
+.field label {
+    font-weight: 500;
+    color: #46513a; /* tom mais escuro para leitura */
+}
+
+/* Inputs mais sóbrios */
+.field input,
+.field select,
+.field textarea {
+    border: 1px solid rgba(0,0,0,0.18);
+    border-radius: 4px;
+    background-color: #fff;
+    transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+/* Foco sutil e acessível */
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    outline: none;
+    border-color: #63783D;
+    box-shadow: 0 0 0 3px rgba(99,120,61,0.18);
+}
+
+/* Placeholder menos chamativo */
+::placeholder {
+    color: rgba(0,0,0,0.45);
+}
+
+/* Botão mais formal */
+.form-grid .field.full input[type="submit"] {
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 4px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+/* Espaço entre grupos */
+.field.full + .field,
+.block-checkbox { 
+    margin-top: 1.25rem;
+}
+
+/* Erros/ajuda (use quando necessário) */
+.help,
+.error {
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+.error { color: #b42318; }
+
+/* marca campos required no label */
+.field input[required] + *,
+.field select[required] + *,
+.field textarea[required] + * {}
+
+/* ou, se o label vem antes do input: */
+label[for="campo_nome"]::after,
+label[for="campo_email"]::after,
+label[for="campo_senha"]::after,
+label[for="campo_senha2"]::after {
+    content: " *";
+    color: #b42318;
     font-weight: 600;
 }
 
-/* Label "Escolha uma cor" maior */
-label[for="colors"] {
-    font-size: 1.1rem;
+/* Negrito no título "Animal de estimação" */
+.split-right fieldset.field.full > legend {
+    font-weight: 700; /* ou 600 se preferir um pouco menos */
+}
+
+/* (Opcional) Negrito nos rótulos das opções */
+.split-right fieldset.field.full .options label {
     font-weight: 600;
 }
 
-/* Label "Digite sua opinião" maior */
-label[for="opiniao"] {
-    font-size: 1.1rem;
+/* Mesma “cara” do botão, mas com tamanho de título */
+.split-right header h1 {
+    background-color: #63783D;
+    color: azure;
+    border: none;
+    border-radius: 4px;
+    padding: 0.4rem 0.6rem;
+    font-size: 1.25rem; /* mais adequado a título */
     font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.2px;
 }
