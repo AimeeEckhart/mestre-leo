@@ -1,101 +1,106 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário de Cadastro</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <header>
-    <h1>Formulário de Cadastro</h1>
-</header>
-<form><br>
-    <!--LEGENDA PARA NOME:-->
-    <label for="campo_nome">Nome:</label>
-    <!--CAMPO INPUT DO TYPE TEXT-->
-    <input id="campo_nome" type="text"placeholder="Digite aqui o seu nome"required>
-    
-    <br><br>
-    
-    <!--CHUNCHUNMARU-->
-    <label for="campo_sobrenome">Sobrenome:</label>
-    <input id="campo_sobrenome" type="text"placeholder="Digite aqui o seu sobrenome"required>
-    
-    <br><br>
-    
-    <!--CAMPO DO TIPO EMAIL-->
-    <label for="campo_email">Email:</label>
-    <input id="campo_email" type="email"placeholder="Digite seu email"required>
-    
-    <br><br>
-    <!--cAMPO PARA SENHA-->
-    <label for="campo_senha">Senha:</label>
-    <input id="campo_senha" type="password"placeholder="Digite aqui a sua senha"required>
-    
-    <br><br>
-    
-    <label for="campo_senha2">Senha:</label>
-    <input id="campo_senha2" type="password"placeholder="Digite a senha novamente"required>
-    
-    <br><br>
-    
-    <!--CAMPO DO TYPE RADIO-->
-    <h2>Animal de estimação</h2>
 
-    <input type="radio" id="dog" name="animal" value="Catioro">
-    <label for="dog">Catioro</label>
-    <br><br>
+    <div class="split">
+        <div class="split-left">
+            <img src="img/undraw_shopping_a55o.svg" alt="Ilustração"> 
+        </div>
     
-    <input type="radio" id="cat" name="animal" value="Gatito">
-    <label for="cat">Gatito</label>
-    <br><br>
-    
-    <input type="radio" id="bird" name="animal" value="Passareco">
-    <label for="bird">Passareco</label>
-    <br><br>
+        <div class="split-right">
+            <header>
+                <h1>Cadastre-se</h1>
+            </header>
+            
+            <form class="form-grid">
+                <div class="field">
+                    <label for="campo_nome">Nome:</label>
+                    <input id="campo_nome" type="text" placeholder="Digite aqui o seu nome" required>
+                </div>
+                
+                <div class="field">
+                    <label for="campo_email">Email:</label>
+                    <input id="campo_email" type="email" placeholder="Digite seu email" required>
+                </div>
+                
+                <div class="field">
+                    <label for="campo_senha">Senha:</label>
+                    <input id="campo_senha" type="password" placeholder="Digite aqui a sua senha" required>
+                </div>
+                
+                <div class="field">
+                    <label for="campo_senha2">Confirmar Senha:</label>
+                    <input id="campo_senha2" type="password" placeholder="Digite a senha novamente" required>
+                </div>
+<br>
 
-    <input type="radio" id="none" name="animal" value="Nenhuma das alternativas">
-    <label for="none">Nenhuma das alternativas</label>
-    <br><br>
+                <!--CAMPO DO TYPE RADIO-->
+                <fieldset class="field full">
+                    <legend>Animal de estimação</legend>
+                    <div class="options">
+                        <label><input type="radio" name="animal" value="Catioro">Catioro</label>
+                        <label><input type="radio" name="animal" value="Gatito">Gatito</label>
+                        <label><input type="radio" name="animal" value="Passareco">Passareco</label>
+                        <label><input type="radio" name="animal" value="Nenhum">Nenhuma das alternativas</label>
+                    </div>
+                </fieldset>
 
-    <!--TYPE DO TIPO CHECKBOX-->
-    <h2>O que você tem em casa?</h2>
 
-    <input id="item1" type="checkbox" name="item1" value="TV">
-    <label for="item1">TV</label><br><br>
-    
-    <input id="item2" type="checkbox" name="item2" value="Geladeira">
-    <label for="item2">Geladeira</label><br><br>
 
-    <input id="item3" type="checkbox" name="item3" value="Paz">
-    <label for="item3">Paz</label><br><br>
+                <!--TYPE DO TIPO CHECKBOX-->
+                <div class="field full block-checkbox">
+                    <h2>O que você tem em casa?</h2>
+                    <div class="options">
+                        <label><input type="checkbox" name="item1" value="TV">TV</label>
+                        <label><input type="checkbox" name="item2" value="Geladeira">Geladeira</label>
+                        <label><input type="checkbox" name="item3" value="Paz">Paz</label>
+                    </div>
+                </div>
+                
 
-    <!--CAMPO DO TYPE SELECT-->
-    <h2>Escolha uma cor</h2>
-    <select name="colors">
-        <option selected disabled value="">Selecione uma cor</option>
-        <option value="vermelho">Vermelho</option>
-        <option value="azul">Azul</option>
-        <option value="roxo">Roxo</option>
-        <option value="rosa">Rosa</option>
-        <option value="azulgoiaba">Azul Goiaba</option>
-    <select>
-        <br><br>
-    
-    <!--CAMPO DO TYPE TEXTAREA-->    
-    <h2>Digite sua opinião</h2>
 
-    <textarea name="opiniao" placeholder="Um texto de exemplo" rows="10" cols="55"></textarea>
+                <!--Select-->
+                <div class="field">
+                    <label for="colors">Escolha uma cor</label>
+                    <select id="colors" name="colors">
+                        <option selected disabled value="">Selecione uma cor</option>
+                        <option value="vermelho">Vermelho</option>
+                        <option value="azul">Azul</option>
+                        <option value="roxo">Roxo</option>
+                        <option value="rosa">Rosa</option>
+                        <option value="azulgoiaba">Azul Goiaba</option>
+                    </select>
+                </div>
+                       
 
-    <br><br>
+                
+                <!--TEXTAREA-->
+                <div class="field full block-textarea">
+                    <label for="opiniao">Digite sua opinião</label>
+                    <textarea id="opiniao" name="opiniao" placeholder="Um texto de exemplo" rows="6" cols="11"></textarea>
+                </div>
 
-    <input type="submit" value="Enviar Formulário"><br><br>
-    
-    </form>    
-    
-    <hr><br>
+                 <!--Submit-->
+                <div class="field full">       
+                    <input type="submit" value="Enviar">
+                </div>
+            </form>
 
-<button>Clique aqui</button>
+        
+        </div>
+    </div>
+
+    <script>
+        console.log("Hello World");
+    </script>
 </body>
+
 </html>

@@ -1,27 +1,219 @@
 * {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
     background-color: #F4F0EA;
     color: #798252;
-    label:hover {
-        cursor: pointer;
-        color: #803232;
-    }
 }
-
 
 header {
-    padding: 2rem;
-    background-color:#715ac5;
-    color:azure;
+    padding: 1rem;
+    
+    color: #63783D;
 }
 
-input{
+input {
     padding: 0.2rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.split { 
+    display: flex; 
+    min-height: 100vh; 
+    align-items: stretch; 
+    justify-content: flex-start;
+}
+
+.split-left {
+    flex: 0 0 30%;              /* 30% fixos */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;              /* opcional */
+}
+
+.split-right {
+    flex: 0 0 60%;              /* 50% fixos */
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;              /* opcional */
+}
+
+/* imagem responsiva */
+.split-left img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+label:hover {
+    cursor: pointer;
+    color: #99CD85;
+}
+
+.form-grid { 
+    display: grid; 
+    grid-template-columns: repeat(12, 1fr); 
+    gap: 0 0.25rem;
+}
+
+
+.field { grid-column: span 6; }
+.field.full { grid-column: span 12; }
+.field label { display: block; margin-bottom: 0.25rem; }
+.field input, .field select, .field textarea { width: 100%; }
+
+.options { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+@media (max-width: 700px) {
+    .field, .field.full { grid-column: span 12; } }
+
+
+/* inputs (e selects) maiores */
+.field input,
+.field select {
+    width: 70%;           /* mais largos */
+    padding: 0.5rem 0.7rem; /* mais altos via padding */
+    box-sizing: border-box;
+    border-radius: 4px;   /* bordas arredondadas */
+    border: 1px solid #ccc; /* borda cinza */
+}
+
+/* Textarea menor */
+.field textarea {
+    width: 60%;
+    padding: 0.5rem 0.7rem;
+    box-sizing: border-box;
+    border-radius: 4px;   /* bordas arredondadas */
+    border: 1px solid #ccc; /* borda cinza */
+}
+
+/* Em telas pequenas, volte a 100% para melhor usabilidade */
+@media (max-width: 700px) {
+    .field input,
+    .field select,
+    .field textarea {
+        width: 100%;
+    }
+}
+   
+/* campos da coluna da esquerda: encosta à direita */
+.form-grid > .field:nth-child(odd) input,
+.form-grid > .field:nth-child(odd) select,
+.form-grid > .field:nth-child(odd) textarea {
+    width: 92%;
+    margin-left: auto;
+}
+
+/* campos da coluna da direita: encosta à esquerda */
+.form-grid > .field:nth-child(even) input,
+.form-grid > .field:nth-child(even) select,
+.form-grid > .field:nth-child(even) textarea {
+    width: 92%;
+    margin-right: auto;
+}
+
+/* Força o "Enviar Formulário" a ~3 cm de largura e alinha à direita */
+.form-grid .field.full input[type="submit"] {
+    width: 2cm !important;
+    padding: 0.25rem;
+    font-size: 0.875rem;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: 0 !important;
+    background-color: #63783D;  /* cor de fundo igual ao header */
+    color: azure;               /* texto branco */
+    border: none;               /* remove borda padrão */
+    border-radius: 4px;         /* cantos arredondados */
+    cursor: pointer;            /* cursor de mão */
+}
+
+
+/* Garante que o submit ignore as regras de coluna */
+.form-grid > .field:nth-child(odd) input[type="submit"],
+.form-grid > .field:nth-child(even) input[type="submit"] {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+}
+
+
+.field.full legend {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+fieldset.field.full {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.block-checkbox {
+    margin-top: 1rem; /* ajuste o valor conforme desejar */
+}
+
+/* adiciona espaço acima do select quando ele vem logo após um .field.full */
+.field.full + .field { margin-top: 2rem; }
+
+/* espaço acima do label da textarea */
+.field label[for="opiniao"] {
+    display: block;       /* garante que a margem funcione verticalmente */
+    margin-top: 2rem;  /* ajuste o valor conforme quiser */
+}
+
+
+
+/* botão "Clique aqui" - tamanho ~3 cm */
+button.btn-small {
+    width: 3cm;
+    padding: 0.25rem;
+    font-size: 0.875rem; 
+    text-align: center;
+}
+
+/* Título do checkbox menor */
+.block-checkbox h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Título do radio menor */
+fieldset legend {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Espaço maior entre as linhas do formulário */
+.form-grid {
+    display: grid; 
+    grid-template-columns: repeat(12, 1fr); 
+    gap: 1rem 0.25rem;  /* aumentou de 0 0.25rem para 1rem 0.25rem */
+}
+
+/* Labels dos campos principais um pouco maiores e em negrito */
+label[for="campo_nome"],
+label[for="campo_email"],
+label[for="campo_senha"],
+label[for="campo_senha2"] {
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+/* Label "Escolha uma cor" maior */
+label[for="colors"] {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Label "Digite sua opinião" maior */
+label[for="opiniao"] {
+    font-size: 1.1rem;
+    font-weight: 600;
 }
